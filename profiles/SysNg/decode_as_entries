@@ -1,0 +1,10 @@
+# "Decode As" entries file for Wireshark 1.10.5.
+#
+# This file is regenerated when saving the "Decode As..." list.
+# So be careful, if you want to make manual changes here.
+
+######## Decode As table entries, can be altered through command line ########
+
+decode_as_entry: udp.port,33001,(none),RTP
+decode_as_entry: udp.port,33000,(none),RTP
+decode_as_entry: udp.port,33003,(none),RTP

@@ -1,0 +1,38 @@
+diff -up ./tap-rtp-common.c.orig ./tap-rtp-common.c
+--- ./tap-rtp-common.c.orig	2014-03-13 15:30:12.358647075 -0600
++++ ./tap-rtp-common.c	2014-03-13 15:30:19.630675009 -0600
+@@ -328,7 +328,7 @@ static const key_value clock_map[] = {
+ 	{PT_PCMA,       8000},
+ 	{PT_G722,       8000},
+ 	{PT_L16_STEREO, 44100},
+-	{PT_L16_MONO,   44100},
++	{PT_L16_MONO,   8000},
+ 	{PT_QCELP,      8000},
+ 	{PT_CN,         8000},
+ 	{PT_MPA,        90000},
+diff -up ./ui/gtk/rtp_player.c.orig ./ui/gtk/rtp_player.c
+--- ./ui/gtk/rtp_player.c.orig	2014-03-13 15:05:23.106646473 -0600
++++ ./ui/gtk/rtp_player.c	2014-03-13 16:01:24.022647048 -0600
+@@ -552,6 +552,13 @@ decode_rtp_packet(rtp_packet_t *rp, SAMP
+ 		break;
+ #endif /* HAVE_G729_G723 */
+ 
++	case PT_L16_MONO:
++//		printf("Payload is %d\n", rp->info->info_payload_len);
++		tmp_buff = (SAMPLE *)g_malloc(rp->info->info_payload_len);
++		memcpy(tmp_buff, rp->payload_data, rp->info->info_payload_len);
++		decoded_bytes=rp->info->info_payload_len;
++		break;
++
+ 	default:
+ 		/*
+ 		 * XXX - return an error here, so the user gets told that
+@@ -577,6 +584,8 @@ update_progress_bar(gfloat fraction)
+ 		gtk_main_iteration();
+ }
+ 
++#define DEBUG 1
++
+ /****************************************************************************/
+ /* Decode the RTP streams and add them to the RTP channels struct
+  */
