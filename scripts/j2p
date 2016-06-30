@@ -1,0 +1,78 @@
+#! /usr/bin/python
+
+import json
+import struct
+import argparse
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
+
+def header(outfile):
+	hdr=struct.pack("IHHIIII", 0xa1b2c3d4,2,4,0,0,0xffff,1)
+	outfile.write(hdr)
+
+def spack(msg):
+	return struct.pack("H",len(msg))+msg
+
+def convert(infile, outfile):
+	fin=open(infile,"r")
+	fout=open(outfile,"w")
+
+	ehdr=struct.pack("6s6sH", '\xcc'*6, '\xbb'*6, 0xff7d)
+	header(fout)
+	for a in fin.readlines():
+		b=json.loads(a)
+		t=b['__REALTIME_TIMESTAMP']
+
+		u=""
+		for key in [ '_SYSTEMD_UNIT', 'UNIT' ]:
+			if key in b.keys():
+				u=str(b[key])
+
+		sid=""
+		if 'SYSLOG_IDENTIFIER' in b.keys():
+			sid=str(b['SYSLOG_IDENTIFIER'])
+
+		pid=0
+		if '_PID' in b.keys():
+			pid=int(b['_PID'])
+
+		pri=0
+		if 'PRIORITY' in b.keys():
+			pri=int(b['PRIORITY'])
+
+		bline=""
+		for key in [ 'CODE_LINE', 'BASH_LINENO' ]:
+			if key in b.keys():
+				bline=str(b[key])
+		bsrc=""
+		for key in [ 'CODE_FILE', 'BASH_SOURCE' ]:
+			if key in b.keys():
+				bsrc=str(b[key])
+		
+#		bsrc=a.split("/")[-1]
+
+		tss=int(t[0:10])
+		tsu=int(t[10:])
+		log=str(b['MESSAGE'])
+
+		mesg=struct.pack("H H",pid,pri)+spack(u)+spack(sid)+spack(bsrc)+spack(bline)+spack(log)
+		mlen=len(mesg)+len(ehdr)
+		rec=struct.pack("IIII",tss,tsu,mlen,mlen)
+		fout.write(rec)
+		fout.write(ehdr)
+		fout.write(mesg)
+
+	fin.close()
+	fout.close()
+
+
+if __name__ == "__main__":
+	parser=argparse.ArgumentParser(description="Convert journals in json format to PCAP")
+	parser.add_argument('file', nargs='+', help="'journalctl -o json' output file")
+	args=parser.parse_args()
+	inputs=args.file
+	outputs=["%s.pcap"%(x.replace('.json','')) for x in inputs] 
+	for (x,y) in zip(inputs,outputs):
+		convert(x,y)
+	
