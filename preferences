@@ -1,4 +1,4 @@
-# Configuration file for Wireshark 1.10.6.
+# Configuration file for Wireshark 1.10.14.
 #
 # This file is regenerated each time preferences are saved within
 # Wireshark.  Making manual changes should be safe, however.
@@ -181,14 +181,16 @@ gui.column.hidden:
 gui.column.format: 
 	"No.", "%m",
 	"Time", "%t",
+	"New Column", "%Tt",
 	"Source", "%s",
 	"Destination", "%d",
 	"Length", "%L",
-	"Calculated window size", "%Cus:tcp.window_size:0:R",
+	"BIF", "%Cus:tcp.analysis.bytes_in_flight:0:R",
+	"ACK-RTT", "%Cus:tcp.analysis.ack_rtt:0:R",
+	"Window", "%Cus:tcp.window_size:0:R",
 	"Protocol", "%p",
 	"Sequence number", "%Cus:tcp.seq:0:R",
 	"Stream index", "%Cus:tcp.stream:0:R",
-	"ACK-RTT", "%Cus:tcp.analysis.ack_rtt:0:R",
 	"Info", "%i"
 
 ####### User Interface: Font ########
@@ -2003,10 +2005,6 @@ nameres.transport_name: FALSE
 # TRUE or FALSE (case-insensitive)
 #ip.tso_support: TRUE
 
-# Whether to look up IP addresses in each GeoIP database we have loaded
-# TRUE or FALSE (case-insensitive)
-#ip.use_geoip: TRUE
-
 # Whether to interpret the originally reserved flag as security flag
 # TRUE or FALSE (case-insensitive)
 #ip.security_flag: FALSE
@@ -2018,10 +2016,6 @@ nameres.transport_name: FALSE
 # Whether the IPv6 summary line should be shown in the protocol tree
 # TRUE or FALSE (case-insensitive)
 #ipv6.summary_in_tree: TRUE
-
-# Whether to look up IPv6 addresses in each GeoIP database we have loaded
-# TRUE or FALSE (case-insensitive)
-#ipv6.use_geoip: TRUE
 
 # Whether to check that all RPL Source Routing Headers adhere to RFC 6554
 # TRUE or FALSE (case-insensitive)
@@ -3751,6 +3745,10 @@ nameres.transport_name: FALSE
 # TRUE or FALSE (case-insensitive)
 #sip.retrans_the_same_sport: TRUE
 
+# Whether SIP should delay tracking the media (e.g., RTP/RTCP) until an SDP offer is answered. If enabled, mid-dialog changes to SDP and media state only take effect if and when an SDP offer is successfully answered; however enabling this prevents tracking media in early-media call scenarios
+# TRUE or FALSE (case-insensitive)
+#sip.delay_sdp_changes: FALSE
+
 # Whether the SCCP dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.
 # TRUE or FALSE (case-insensitive)
 #skinny.desegment: TRUE
@@ -4424,7 +4422,3 @@ nameres.transport_name: FALSE
 # Determines time between tap updates
 # A decimal number
 #statistics.update_interval: 3000
-
-# Determines maximum height of RTP Player window
-# A decimal number
-#statistics.rtp_player_max_visible: 4
