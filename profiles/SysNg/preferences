@@ -252,21 +252,21 @@ gui.filter_expressions.expr: sip or rtp
 gui.filter_expressions.label: Journal
 gui.filter_expressions.enabled: TRUE
 gui.filter_expressions.expr: sysng
-gui.filter_expressions.label: Sharness
+gui.filter_expressions.label: BATS
 gui.filter_expressions.enabled: TRUE
-gui.filter_expressions.expr: sysng.ident=="sharness"
+gui.filter_expressions.expr: sysng.ident=="bats"
 gui.filter_expressions.label: DNS
 gui.filter_expressions.enabled: TRUE
-gui.filter_expressions.expr: dns or sysng.ident=="sharness" or sysng.ident=="named" 
+gui.filter_expressions.expr: dns or sysng.ident=="bats" or sysng.ident=="named" 
 gui.filter_expressions.label: DHCP
 gui.filter_expressions.enabled: TRUE
-gui.filter_expressions.expr: bootp or sysng.ident=="sharness" or sysng.ident[0:2]=="dhc"
+gui.filter_expressions.expr: bootp or sysng.ident=="bats" or sysng.ident[0:2]=="dhc"
 gui.filter_expressions.label: AMP
 gui.filter_expressions.enabled: TRUE
-gui.filter_expressions.expr: sysng.ident=="sharness" or sysng.ident=="ampd" or udp.port==4000 or (tcp.port==4000 and tcp.len>100)
+gui.filter_expressions.expr: sysng.ident=="bats" or sysng.ident=="ampd" or udp.port==4000 or (tcp.port==4000 and tcp.len>100)
 gui.filter_expressions.label: ICMP
 gui.filter_expressions.enabled: TRUE
-gui.filter_expressions.expr: sysng.ident=="sharness" or sysng.service contains "bearer" or icmp
+gui.filter_expressions.expr: sysng.ident=="bats" or sysng.service contains "bearer" or icmp
 
 ####### Capture ########
 
