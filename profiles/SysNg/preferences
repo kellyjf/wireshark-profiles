@@ -188,6 +188,7 @@ gui.column.format:
 	"Ident", "%Cus:sysng.ident:0:R",
 	"Service", "%Cus:sysng.unit:0:R",
 	"VLAN", "%Cus:vlan.id:0:R",
+	"TTL", "%Cus:ip.ttl:0:R",
 	"Hostname", "%Cus:sysng.hostname:0:R",
 	"Source", "%ns",
 	"SrcPort", "%Cus:udp.srcport:0:R",
@@ -267,6 +268,9 @@ gui.filter_expressions.expr: sysng.ident=="bats" or sysng.ident=="ampd" or udp.p
 gui.filter_expressions.label: ICMP
 gui.filter_expressions.enabled: TRUE
 gui.filter_expressions.expr: sysng.ident=="bats" or sysng.service contains "bearer" or icmp
+gui.filter_expressions.label: HTTP
+gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.expr: tcp.port==80
 
 ####### Capture ########
 
