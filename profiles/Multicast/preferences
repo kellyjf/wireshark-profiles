@@ -174,7 +174,7 @@
 
 # Packet list hidden columns
 # List all columns to hide in the packet list.
-gui.column.hidden: %Cus:eth.src:0:R,%Cus:eth.dst:0:R,%Cus:sll.src.eth:0:R,%Cus:sysng.ident:0:R,%Cus:sysng.unit:0:R,%Cus:sysng.hostname:0:R,%Cus:udp.srcport:0:R,%Cus:udp.srcport:0:R,%Cus:udp.srcport:0:R,%nd,%Cus:udp.dstport:0:R,%Cus:udp.dstport:0:R,%L,%Cus:rtp.p_type:0:R,%Cus:rtp.ssrc:0:R,%Cus:rtp.seq:0:R,%Cus:sysng.src:0:R,%Cus:sysng.len:0:R,%Cus:gpak.call.apinum:0:R,%Cus:gpak.call.channel:0:R,%Cus:udp.dstport:0:R
+gui.column.hidden: %Cus:eth.src:0:R,%Cus:eth.dst:0:R,%Cus:sll.src.eth:0:R,%Cus:sysng.ident:0:R,%Cus:sysng.unit:0:R,%Cus:sysng.hostname:0:R,%Cus:udp.srcport:0:R,%Cus:udp.srcport:0:R,%Cus:udp.srcport:0:R,%nd,%Cus:udp.dstport:0:R,%Cus:udp.dstport:0:R,%L,%Cus:rtp.p_type:0:R,%Cus:rtp.ssrc:0:R,%Cus:rtp.seq:0:R,%Cus:sysng.src:0:R,%Cus:sysng.len:0:R,%Cus:gpak.call.channel:0:R,%Cus:udp.dstport:0:R
 
 # Packet list column format
 # Each pair of strings consists of a column title and its format
@@ -205,9 +205,9 @@ gui.column.format:
 	"Seq#", "%Cus:rtp.seq:0:R",
 	"Source", "%Cus:sysng.src:0:R",
 	"Length", "%Cus:sysng.len:0:R",
-	"API", "%Cus:gpak.call.apinum:0:R",
 	"Channel", "%Cus:gpak.call.channel:0:R",
 	"Destination", "%Cus:ip.dst:0:R",
+	"GrpIP", "%Cus:pim.group:0:R",
 	"DstPort", "%Cus:udp.dstport:0:R",
 	"Info", "%i"
 
@@ -252,6 +252,15 @@ gui.filter_expressions.expr: dvmrp or pim
 gui.filter_expressions.label: SSDP
 gui.filter_expressions.enabled: TRUE
 gui.filter_expressions.expr: ip.dst==239.0.0.0/8
+gui.filter_expressions.label: uPnP
+gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.expr: igmp.maddr==239.0.0.0/8
+gui.filter_expressions.label: JoinPrune
+gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.expr: pim.type==3
+gui.filter_expressions.label: Demo
+gui.filter_expressions.enabled: TRUE
+gui.filter_expressions.expr: igmp.maddr==239.0.0.0/8 or pim.type==3 or ip.dst==239.0.0.0/8
 
 ####### Capture ########
 
