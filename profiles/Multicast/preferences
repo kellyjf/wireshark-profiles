@@ -4074,7 +4074,7 @@ gui.filter_expressions.expr: igmp.maddr==239.0.0.0/8 or pim.type==3 or ip.dst==2
 
 # Try to decode a packet using an heuristic sub-dissector before using a sub-dissector registered to a specific port
 # TRUE or FALSE (case-insensitive)
-#tcp.try_heuristic_first: FALSE
+tcp.try_heuristic_first: TRUE
 
 # Do not place the TCP Timestamps in the summary line
 # TRUE or FALSE (case-insensitive)

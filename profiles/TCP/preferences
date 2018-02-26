@@ -185,11 +185,12 @@ gui.column.format:
 	"Source", "%s",
 	"Destination", "%d",
 	"Length", "%L",
+	"Ack#", "%Cus:tcp.ack:0:R",
+	"Seq#", "%Cus:tcp.seq:0:R",
 	"BIF", "%Cus:tcp.analysis.bytes_in_flight:0:R",
 	"ACK-RTT", "%Cus:tcp.analysis.ack_rtt:0:R",
 	"Window", "%Cus:tcp.window_size:0:R",
 	"Protocol", "%p",
-	"Sequence number", "%Cus:tcp.seq:0:R",
 	"Stream index", "%Cus:tcp.stream:0:R",
 	"Info", "%i"
 
