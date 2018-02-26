@@ -17,13 +17,13 @@ do
         local pds = Proto("pds", "PDS Data");
 
 	-- Create the new fields, and associate to the protocol
-        local F_type = ProtoField.string("pds.type", "Type")
-        local F_version = ProtoField.string("pds.version", "Version")
-        local F_length = ProtoField.string("pds.len", "Length")
-        local F_seqno = ProtoField.string("pds.seqno", "Sequence")
+        local F_type = ProtoField.uint8("pds.type", "Type")
+        local F_version = ProtoField.uint8("pds.version", "Version")
+        local F_length = ProtoField.uint16("pds.len", "Length")
+        local F_seqno = ProtoField.uint16("pds.seqno", "Sequence")
 
-        local F_rxnoise = ProtoField.string("pds.rxnoise", "Rx Noise")
-        local F_rxlock = ProtoField.string("pds.rxlock", "Rx Lock")
+        local F_rxnoise = ProtoField.int16("pds.rxnoise", "Rx Noise")
+        local F_rxlock = ProtoField.uint16("pds.rxlock", "Rx Lock")
         local F_sync = ProtoField.string("pds.sync", "Sync")
         local F_l2 = ProtoField.string("pds.l2", "L2 Status")
         local F_l3 = ProtoField.string("pds.l3", "L3 Status")
@@ -32,7 +32,7 @@ do
         local F_mutein = ProtoField.string("pds.mute", "Mute Input")
         local F_mode = ProtoField.string("pds.mode", "Mode")
  
-        local F_rxlevel = ProtoField.string("pds.rxlevel", "Rx Level")
+        local F_rxlevel = ProtoField.int16("pds.rxlevel", "Rx Level")
         local F_txcapa = ProtoField.string("pds.txcapa", "Tx Cap A")
         local F_txcapb = ProtoField.string("pds.txcapb", "Tx Cap B")
         local F_txcapc = ProtoField.string("pds.txcapc", "Tx Cap C")
